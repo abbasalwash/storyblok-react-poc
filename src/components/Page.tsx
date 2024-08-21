@@ -1,7 +1,6 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
 
-const Project = () => {
+const Page = () => {
     const location = useLocation();
 
     return (
@@ -12,4 +11,4 @@ const Project = () => {
     );
 }
 
-export default Project;
+export default Page;

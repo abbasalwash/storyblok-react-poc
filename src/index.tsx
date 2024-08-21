@@ -7,10 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import { apiPlugin, storyblokInit } from "@storyblok/react";
 import { BrowserRouter } from "react-router-dom";
 
-console.log(process.env.REACT_APP_STORYBLOK_ACCESS_TOKEN);
-
 storyblokInit({
-  accessToken: process.env.REACT_APP_STORYBLOK_ACCESS_TOKEN,
+  accessToken: "5vz6rrGr8kRkThsJ0iSRHwtt",
   use: [apiPlugin],
   components: {},
 });

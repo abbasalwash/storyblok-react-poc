@@ -1,0 +1,172 @@
+{
+  "components": [
+    {
+      "name": "file_item",
+      "display_name": "File Item",
+      "created_at": "2024-08-21T08:13:30.629Z",
+      "updated_at": "2024-08-21T09:26:07.030Z",
+      "id": 6191734,
+      "schema": {
+        "file": {
+          "type": "asset",
+          "pos": 1,
+          "asset_folder_id": 626513,
+          "required": true,
+          "filetypes": [
+            "texts"
+          ]
+        },
+        "type": {
+          "type": "option",
+          "pos": 1,
+          "display_name": "Type",
+          "required": true,
+          "source": "internal",
+          "datasource_slug": "file-types",
+          "exclude_empty_option": false,
+          "default_value": "PDF",
+          "use_uuid": true
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "File Item",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null
+    },
+    {
+      "name": "menu_item",
+      "display_name": "menu item",
+      "created_at": "2024-08-20T14:52:28.529Z",
+      "updated_at": "2024-08-20T20:04:24.318Z",
+      "id": 6189243,
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0,
+          "required": true,
+          "translatable": true,
+          "key": "title"
+        },
+        "link": {
+          "type": "multilink",
+          "pos": 1,
+          "key": "link"
+        },
+        "submenu_item": {
+          "type": "bloks",
+          "pos": 2,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "menu_item"
+          ],
+          "key": "submenu_items"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "menu item",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null
+    },
+    {
+      "name": "navigation",
+      "display_name": "navigation",
+      "created_at": "2024-08-20T14:43:42.853Z",
+      "updated_at": "2024-08-21T15:07:09.198Z",
+      "id": 6189229,
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0
+        },
+        "menu_item": {
+          "type": "bloks",
+          "pos": 1,
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "menu_item"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "navigation",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null
+    },
+    {
+      "name": "page",
+      "display_name": "page",
+      "created_at": "2024-08-20T14:34:34.208Z",
+      "updated_at": "2024-08-21T09:46:49.113Z",
+      "id": 6189159,
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0,
+          "key": "title"
+        },
+        "content": {
+          "type": "richtext",
+          "pos": 1,
+          "key": "content"
+        },
+        "related_downloads": {
+          "type": "bloks",
+          "pos": 2,
+          "display_name": "Related Downloads",
+          "key": "blocks",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "file_item"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "page",
+      "component_group_uuid": null,
+      "color": null,
+      "icon": null,
+      "internal_tags_list": [],
+      "internal_tag_ids": [],
+      "content_type_asset_preview": null
+    }
+  ]
+}
