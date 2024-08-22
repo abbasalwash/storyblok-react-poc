@@ -8,7 +8,8 @@ import { fetchStories } from "./data/api";
 import { Alert } from "react-bootstrap";
 
 const App = () => {
-  const [navigationData, setNavigationData] = useState<NavigationStoryblok | null>(null);
+  const [navigationData, setNavigationData] =
+    useState<NavigationStoryblok | null>(null);
 
   useEffect(() => {
     fetchStories("navigation")
@@ -18,19 +19,27 @@ const App = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  const renderRoutes = () => (
+  const renderRoutes = () =>
     navigationData?.menu_item?.flatMap((item) => {
       const itemRoutes = [
-        <Route key={item._uid} path={`/${item.link?.cached_url}`} element={<Page />} />
+        <Route
+          key={item._uid}
+          path={`/${item.link?.cached_url}`}
+          element={<Page id={item.link?.id} />}
+        />,
       ];
 
-      const subItemRoutes = item.submenu_item?.map((subitem) => (
-        <Route key={subitem._uid} path={`/${subitem.link?.cached_url}`} element={<Page />} />
-      )) || [];
+      const subItemRoutes =
+        item.submenu_item?.map((subitem) => (
+          <Route
+            key={subitem._uid}
+            path={`/${subitem.link?.cached_url}`}
+            element={<Page id={subitem.link?.id} />}
+          />
+        )) || [];
 
       return [...itemRoutes, ...subItemRoutes];
-    })
-  );
+    });
 
   const renderBody = () => (
     <>
