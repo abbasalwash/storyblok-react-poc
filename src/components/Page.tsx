@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Row } from "react-bootstrap";
+import { renderRichText } from "@storyblok/react";
+import parse from "html-react-parser";
+
 import { fetchStory } from "../data/api";
 import { PageStoryblok } from "../interfaces/component-types-sb";
-import { Row } from "react-bootstrap";
 
 const Page = ({ slug }: { slug: string | undefined }) => {
-  const location = useLocation();
   const [story, setStory] = useState<PageStoryblok | null>(null);
 
   useEffect(() => {
@@ -19,19 +20,25 @@ const Page = ({ slug }: { slug: string | undefined }) => {
   }, [slug]);
 
   const renderBody = () => {
-    console.log(story?.content?.content);
-
     return (
       <>
-        <h1 className="display-1">{story?.title}</h1>
-        <p>Huidig Pad: {location.pathname}</p>
+        <Row className="mt-5 mb-5">
+          <h1 className="display-1 text-center">
+            <strong>{story?.title}</strong>
+          </h1>
+        </Row>
+        <Row>
+          <span className="border">
+            {parse(renderRichText(story?.richtext))}
+          </span>
+        </Row>
       </>
     );
   };
 
   const renderLoading = () => <p>Loading...</p>;
 
-  return <Row>{story ? renderBody() : renderLoading()}</Row>;
+  return story ? renderBody() : renderLoading();
 };
 
 export default Page;

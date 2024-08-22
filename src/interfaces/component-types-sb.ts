@@ -83,7 +83,7 @@ export interface MenuItemStoryblok {
 }
 
 export interface NavigationStoryblok {
-  title?: string;
+  title: string;
   menu_item?: MenuItemStoryblok[];
   component: "navigation";
   _uid: string;
@@ -100,8 +100,8 @@ export interface RichtextStoryblok {
 }
 
 export interface PageStoryblok {
-  title?: string;
-  content?: RichtextStoryblok;
+  title: string;
+  richtext: RichtextStoryblok;
   related_downloads?: FileItemStoryblok[];
   component: "page";
   _uid: string;

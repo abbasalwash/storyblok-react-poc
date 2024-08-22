@@ -1,10 +1,14 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Alert, Container, Row } from "react-bootstrap";
+
 import Page from "./components/Page";
 import Navigation from "./components/Navigation";
-import { useEffect, useState } from "react";
-import { NavigationStoryblok } from "./interfaces/component-types-sb";
+import {
+  MenuItemStoryblok,
+  NavigationStoryblok,
+} from "./interfaces/component-types-sb";
 import { fetchStory } from "./data/api";
-import { Alert, Container, Row } from "react-bootstrap";
 
 const App = () => {
   const [navigationData, setNavigationData] =
@@ -18,9 +22,9 @@ const App = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  const renderRoutes = () =>
-    navigationData?.menu_item?.flatMap((item) => {
-      const itemRoutes = [
+  const generateRoutes = (items: MenuItemStoryblok[] = []) =>
+    items?.flatMap((item) => {
+      const routes = [
         <Route
           key={item._uid}
           path={`/${item.link?.cached_url}`}
@@ -28,17 +32,14 @@ const App = () => {
         />,
       ];
 
-      const subItemRoutes =
-        item.submenu_item?.map((subitem) => (
-          <Route
-            key={subitem._uid}
-            path={`/${subitem.link?.cached_url}`}
-            element={<Page slug={subitem.link?.cached_url} />}
-          />
-        )) || [];
+      if (item.submenu_item) {
+        routes.push(...generateRoutes(item.submenu_item));
+      }
 
-      return [...itemRoutes, ...subItemRoutes];
-    });
+      return routes;
+    }) || [];
+
+  const renderRoutes = () => generateRoutes(navigationData?.menu_item);
 
   const renderBody = () => (
     <>
