@@ -1,18 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
 import Page from "./components/Page";
 import Navigation from "./components/Navigation";
 import { useEffect, useState } from "react";
 import { NavigationStoryblok } from "./interfaces/component-types-sb";
-import { fetchStories } from "./data/api";
-import { Alert } from "react-bootstrap";
+import { fetchStory } from "./data/api";
+import { Alert, Container, Row } from "react-bootstrap";
 
 const App = () => {
   const [navigationData, setNavigationData] =
     useState<NavigationStoryblok | null>(null);
 
   useEffect(() => {
-    fetchStories("navigation")
+    fetchStory("navigation")
       .then((response) => {
         setNavigationData(response.data.story.content as NavigationStoryblok);
       })
@@ -25,7 +24,7 @@ const App = () => {
         <Route
           key={item._uid}
           path={`/${item.link?.cached_url}`}
-          element={<Page id={item.link?.id} />}
+          element={<Page slug={item.link?.cached_url} />}
         />,
       ];
 
@@ -34,7 +33,7 @@ const App = () => {
           <Route
             key={subitem._uid}
             path={`/${subitem.link?.cached_url}`}
-            element={<Page id={subitem.link?.id} />}
+            element={<Page slug={subitem.link?.cached_url} />}
           />
         )) || [];
 
@@ -43,9 +42,11 @@ const App = () => {
 
   const renderBody = () => (
     <>
-      <Navigation blok={navigationData} />
+      <Row>
+        <Navigation blok={navigationData} />
+      </Row>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Page slug={"home"} />} />
         {renderRoutes()}
       </Routes>
     </>
@@ -58,9 +59,7 @@ const App = () => {
   );
 
   return (
-    <div className="container">
-      {navigationData ? renderBody() : renderLoading()}
-    </div>
+    <Container>{navigationData ? renderBody() : renderLoading()}</Container>
   );
 };
 
