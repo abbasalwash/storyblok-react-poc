@@ -9,8 +9,10 @@ import "./index.css";
 import App from "./App";
 
 import FileItemComponent from "./components/FileItem";
+import Page from "./components/Page";
 
 const components = {
+  "page": Page,
   "file_item": FileItemComponent
 };
 

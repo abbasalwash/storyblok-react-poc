@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import { renderRichText, StoryblokComponent } from "@storyblok/react";
+import { renderRichText, StoryblokComponent, storyblokEditable } from "@storyblok/react";
 import parse from "html-react-parser";
 
 import { fetchStory } from "../data/api";
@@ -41,7 +41,7 @@ const Page = ({ slug }: { slug: string | undefined }) => {
     const fileItemComponents = renderFileItems(fileItems || []);
 
     return (
-      <>
+      <div {...storyblokEditable(story as PageStoryblok)}>
         <Row className="mt-5 mb-5">
           <h1 className="display-1 text-center">
             <strong>{story?.title}</strong>
@@ -57,7 +57,7 @@ const Page = ({ slug }: { slug: string | undefined }) => {
             {fileItemComponents}
           </div>
         </Row>
-      </>
+      </div>
     );
   };
 
