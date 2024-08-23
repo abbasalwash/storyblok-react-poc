@@ -1,10 +1,24 @@
 import { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import { renderRichText } from "@storyblok/react";
+import { renderRichText, StoryblokComponent } from "@storyblok/react";
 import parse from "html-react-parser";
 
 import { fetchStory } from "../data/api";
-import { PageStoryblok } from "../interfaces/component-types-sb";
+import { FileItemStoryblok, PageStoryblok } from "../interfaces/component-types-sb";
+import { FileItem } from "../bng_components/FileItem";
+import FileItemComponent from "./FileItem";
+
+export type FileTypes = "pdf" | "image";
+
+interface IFileTypes {
+    Pdf: FileTypes,
+    Image: FileTypes
+}
+
+export const FileType: IFileTypes = {
+    Pdf: "pdf",
+    Image: "image"
+};
 
 const Page = ({ slug }: { slug: string | undefined }) => {
   const [story, setStory] = useState<PageStoryblok | null>(null);
@@ -12,14 +26,20 @@ const Page = ({ slug }: { slug: string | undefined }) => {
   useEffect(() => {
     if (slug) {
       fetchStory(slug)
-        .then((response) =>
-          setStory(response.data.story.content as PageStoryblok)
-        )
+        .then((response) => {
+          setStory(response.data.story.content as PageStoryblok);
+        })
         .catch((error) => console.error(error));
     }
   }, [slug]);
 
   const renderBody = () => {
+    const fileItems = story?.related_downloads?.filter((fileItem: FileItemStoryblok) => {
+      return fileItem.component == "file_item";
+    });
+
+    const fileItemComponents = renderFileItems(fileItems || []);
+
     return (
       <>
         <Row className="mt-5 mb-5">
@@ -32,8 +52,19 @@ const Page = ({ slug }: { slug: string | undefined }) => {
             {parse(renderRichText(story?.richtext))}
           </span>
         </Row>
+        <Row className="py-3">
+          <div className="d-flex flex-row">
+            {fileItemComponents}
+          </div>
+        </Row>
       </>
     );
+  };
+
+  const renderFileItems = (fileItems: FileItemStoryblok[]) => {  
+    return fileItems.map((fileItem: FileItemStoryblok) => {
+      return <StoryblokComponent blok={fileItem} key={fileItem._uid} />
+    });
   };
 
   const renderLoading = () => <p>Loading...</p>;

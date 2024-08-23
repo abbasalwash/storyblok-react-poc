@@ -1,18 +1,15 @@
-export interface FileItemProps {
-    type: string,
-    file: string // must be a content type from Storyblok
-}
+import { storyblokEditable } from "@storyblok/react";
+import { FileItem } from '../bng_components/FileItem'
+import { FileItemStoryblok } from '../interfaces/component-types-sb'
 
-export const FileItem = (props: FileItemProps) => {
-
-    // get data of file asset, like file size (content-length)
-    // render file item layout block
-
+const FileItemComponent = ({ blok }: FileItemStoryblok) => {
     return (
-        <div>
-            <img src={"ergens een icon van via props.type"} />
-            <h1>{"props.file.title"} {"file size"}</h1>
-            <a href={"props.file.url"} className="button-link download">Download</a>
-        </div>
+        <FileItem {...storyblokEditable(blok)}
+            title={blok.file.title || ""}
+            helpDescription={blok.file.alt}
+            fileSizeInBytes='2400'
+            url={blok.file.filename} />
     );
-}
+};
+   
+export default FileItemComponent;

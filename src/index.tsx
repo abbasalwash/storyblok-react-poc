@@ -8,10 +8,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./App";
 
+import FileItemComponent from "./components/FileItem";
+
+const components = {
+  "file_item": FileItemComponent
+};
+
 storyblokInit({
   accessToken: "5vz6rrGr8kRkThsJ0iSRHwtt",
   use: [apiPlugin],
-  components: {},
+  components
 });
 
 const root = ReactDOM.createRoot(
