@@ -4,11 +4,14 @@ import { FileItemStoryblok } from '../interfaces/component-types-sb'
 
 const FileItemComponent = ({ blok }: FileItemStoryblok) => {
     return (
-        <FileItem {...storyblokEditable(blok)}
-            title={blok.file.title || ""}
-            helpDescription={blok.file.alt}
-            fileSizeInBytes='2400'
-            url={blok.file.filename} />
+        <div {...storyblokEditable(blok)}>
+            <FileItem 
+                icon="/assets/icons/pdf-file-icon.svg"
+                title={blok.file.title || ""}
+                helpDescription={blok.file.alt}
+                fileSizeInBytes='2400'
+                url={blok.file.filename} />
+        </div>
         // <div className="d-flex flex-row border py-2 pe-2 shadow-sm rounded" {...storyblokEditable(blok)}>
         //     <img src="/assets/icons/pdf-file-icon.svg" alt={blok.file.alt} />
         //     <div>

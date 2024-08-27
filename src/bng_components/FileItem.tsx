@@ -1,18 +1,19 @@
 import { formatFileSizeFromBytes } from "../helpers/file";
 
 export interface IFileItem {
+    icon: string
     title: string
     helpDescription: string
     fileSizeInBytes: string
     url: string
 }
 
-export const FileItem = (props: IFileItem) => {
+export const FileItem = (props: IFileItem) => {    
     const fileSize = formatFileSizeFromBytes(parseFloat(props.fileSizeInBytes));
 
     return (
         <div className="d-flex flex-row border py-2 pe-2 shadow-sm rounded">
-            <img src="/assets/icons/pdf-file-icon.svg" alt={props.helpDescription} />
+            <img src={props.icon} alt={props.helpDescription} />
             <div>
                 <strong>{props.title}</strong>
                 <div>{fileSize}</div>
