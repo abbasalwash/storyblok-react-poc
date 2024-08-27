@@ -6,13 +6,14 @@ export interface IFileItem {
     helpDescription: string
     fileSizeInBytes: string
     url: string
+    customProps?: any
 }
 
 export const FileItem = (props: IFileItem) => {    
     const fileSize = formatFileSizeFromBytes(parseFloat(props.fileSizeInBytes));
 
     return (
-        <div className="d-flex flex-row border py-2 pe-2 shadow-sm rounded">
+        <div {...props.customProps} className="d-flex flex-row border py-2 pe-2 shadow-sm rounded">
             <img src={props.icon} alt={props.helpDescription} />
             <div>
                 <strong>{props.title}</strong>
